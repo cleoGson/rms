@@ -13,6 +13,8 @@ try {
     require('bootstrap');
     require('admin-lte');
     require('highcharts');
+    require('vue-template-compiler');
+    require('@fortawesome/fontawesome-free');
 } catch (e) {}
 
 /**
