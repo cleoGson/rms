@@ -8,7 +8,11 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 import VueRouter from 'vue-router';
-import { Form, HasError, AlertError } from 'vform'
+import { Form, HasError, AlertError } from 'vform';
+import VueProgressBar from 'vue-progressbar';
+import Swal from 'sweetalert2';
+window.Swal =Swal;
+
 window.Form =Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
@@ -20,11 +24,38 @@ const routes = [
     { path: '/profile', component: require('./components/Profile.vue').default }
   ];
 
+  const toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000
+  })
+  window.toast =toast;
   const router = new VueRouter({
     mode: 'history',
     routes 
   });
+  
+  window.Fire = new Vue();
+Vue.filter('upperText', function(text){
+return text.toUpperCase();
+});
 
+const options = {
+    color: '#bffaf3',
+    failedColor: '#874b4b',
+    thickness: '5px',
+    transition: {
+      speed: '0.2s',
+      opacity: '0.6s',
+      termination: 300
+    },
+    autoRevert: true,
+    location: 'left',
+    inverse: false
+  }
+  
+  Vue.use(VueProgressBar, options)
 
 /**
  * The following block of code may be used to automatically register your

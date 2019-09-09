@@ -17,22 +17,22 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                 <tr>
-                  <th>Rendering engine</th>
-                  <th>Browser</th>
-                  <th>Platform(s)</th>
-                  <th>Engine version</th>
-                  <th>CSS grade</th>
+                  <th>#NO</th>
+                  <th>Full Name</th>
+                  <th>Email</th>
+                  <th>Gender</th>
+                  <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                  <td>Misc</td>
-                  <td>Dillo 0.8</td>
-                  <td>Embedded devices</td>
-                  <td>-</td>
+                <tr v-for="user in users" :key="user.id"> 
+                  <td>{{user.id}}</td>
+                  <td>{{user.name|upperText}}</td>
+                  <td>{{user.email}}</td>
+                  <td>{{user.gender}}</td>
                   <td>
                   <a href="#"> <i class="fas fa-edit blue"></i> </a>/
-                  <a href="#"> <i class="fas fa-trash red"></i> </a>
+                  <a href="#" @click="deleteUser(user.id)"> <i class="fas fa-trash red"></i> </a>
                   </td>
                 </tr> 
                 </tbody>
@@ -106,6 +106,7 @@
     export default {
         data(){
             return {
+            users: {},
             form: new Form({
             name : '',
             email : '',
@@ -115,10 +116,38 @@
             }
         },
         methods: {
+            loadUsers(){
+          axios.get('api/user').then(({data})=>(this.users = data.data));
+            },
+            deleteUser(id){
+
+            },
             createUser(){
-                this.form.post('api/user');
+                this.$Progress.start();
+                this.form.post('api/user')
+                .then(()=>{
+                Fire.$emit('afterCreate');
+                $('#addUser').modal('hide');
+                toast.fire({
+                type: 'success',
+                title: 'User created  successfully'
+                });
+                 this.$Progress.finish();
+                })
+                .catch(()=>{
+
+                });
+              
+                
             }
         },
+          created(){
+                this.loadUsers();
+                Fire.$on('afterCreate',()=>{
+                this.loadUsers();
+                });
+                //setInterval(()=>this.loadUsers(),3000);
+            },
         mounted() {
             console.log('Component mounted.')
         }

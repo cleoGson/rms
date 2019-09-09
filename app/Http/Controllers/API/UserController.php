@@ -4,7 +4,8 @@ namespace App\Http\Controllers\API;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Hash;
+use App\User;
 class UserController extends Controller
 {
     /**
@@ -14,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return User::latest()->paginate(100);
     }
 
     /**
@@ -25,10 +26,23 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-      return [
-          'message'=>'I have your data',
-          'data'=>$request->all()
-      ];
+       
+        $this->validate($request, [
+            'name' => 'required',
+            'photo'=>'mime:jpg,jpeg,svg,png',
+            'email' => 'required|email|unique:users',
+        ]);
+       
+        $user = User::create([
+            'name' => $request['name'],
+            'email' => $request['email'],
+            'password' => Hash::make($request['password']),
+        ]);
+
+        return [
+            'message'=>'good job'
+        ];
+      
     }
 
     /**

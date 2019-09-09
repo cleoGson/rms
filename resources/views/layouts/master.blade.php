@@ -177,6 +177,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <router-link to="/users" class="nav-link active">
+                <vue-progress-bar></vue-progress-bar>
                   <i class="fas fa-users nav-icon"></i>
                   <p>Users</p>
                 </router-link>
