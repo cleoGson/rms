@@ -31,6 +31,7 @@ class UserController extends Controller
             'name' => 'required',
             'photo'=>'mime:jpg,jpeg,svg,png',
             'email' => 'required|email|unique:users',
+            'password'=>'required',
         ]);
        
         $user = User::create([
@@ -76,6 +77,7 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+    $user=User::findOrFail($id);
+    $user->delete();
     }
 }

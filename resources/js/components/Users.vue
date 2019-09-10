@@ -1,6 +1,6 @@
 <template>
-    <div class="container">
-       <div class="row mt-2">
+<section class="content">
+    <div class="row">
        <div class="col-md-12"> 
         <div class="card">
             <div class="card-header">
@@ -43,10 +43,8 @@
           <!-- /.card -->
         </div>
         <!-- /.col -->
-      </div>
-      <!-- /.row -->
         <!-- Modal -->
-<div class="modal fade" id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" data-toggle="modal" data id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -98,8 +96,8 @@
     </div>
   </div>
 </div>
-   
-    </div>
+</div>
+</section>
 </template>
 
 <script>
@@ -120,7 +118,30 @@
           axios.get('api/user').then(({data})=>(this.users = data.data));
             },
             deleteUser(id){
-
+                  Swal.fire({
+                    title: 'Are you sure?',
+                    text: "You won't be able to revert this!",
+                    type: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if(result.value){
+                        this.form.delete('api/user/'+id).then(()=>{
+                            Swal.fire(
+                            'Deleted!',
+                            'User has been deleted.',
+                            'success'
+                            )
+                      Fire.$emit('afterCreate');      
+                     }).catch(()=>{
+                          Swal('Failed!',
+                          'Something went Wrong',
+                          'warning');
+                        });
+                        }
+                    })
             },
             createUser(){
                 this.$Progress.start();
