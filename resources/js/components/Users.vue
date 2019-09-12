@@ -6,7 +6,7 @@
             <div class="card-header">
               <h3 class="card-title">Users table</h3>
               <div class="card-tools">
-                <button class="btn btn-success"  data-toggle="modal" data-target="#addUser">
+                <button class="btn btn-success"  @click="newModel">
                  Add New
                  <i class="fas fa-user-plus fa-fw"></i>
                   </button>
@@ -25,13 +25,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="user in users" :key="user.id"> 
+                <tr v-for="user in users.data" :key="user.id"> 
                   <td>{{user.id}}</td>
                   <td>{{user.name|upperText}}</td>
                   <td>{{user.email}}</td>
                   <td>{{user.gender}}</td>
                   <td>
-                  <a href="#"> <i class="fas fa-edit blue"></i> </a>/
+                  <a href="#" @click="editModel(user)"> <i class="fas fa-edit blue"></i> </a>/
                   <a href="#" @click="deleteUser(user.id)"> <i class="fas fa-trash red"></i> </a>
                   </td>
                 </tr> 
@@ -39,21 +39,27 @@
               </table>
             </div>
             <!-- /.card-body -->
+            <div class="card-footer"> 
+              <pagination :data="users" @pagination-change-page="getResults">
+                
+              </pagination>
+            </div>
           </div>
           <!-- /.card -->
         </div>
         <!-- /.col -->
         <!-- Modal -->
-<div class="modal fade" data-toggle="modal" data id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade"   data-toggle="modal" data id="addUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add User</h5>
+        <h5 class="modal-title"  v-show="!editmode" id="exampleModalLabel">Add User</h5>
+        <h5 class="modal-title" v-show="editmode" id="exampleModalLabel">Update User Details</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
-      <form @submit.prevent="createUser">
+      <form @submit.prevent="editmode ? updateUser() : createUser()">
       <div class="modal-body">
        
      <div class="form-group">
@@ -70,7 +76,7 @@
     </div>
     <div class="form-group">
       <label>Gender</label>
-      <select v-model="form.gender" type="gender" name="gender" placeholder="Minimum 8 character"
+      <select v-model="form.gender" type="text" name="gender"
         class="form-control" :class="{ 'is-invalid': form.errors.has('gender') }">
         <option value=""> Select Gender</option>
         <option value="Male"> Male </option>
@@ -90,7 +96,9 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary blue">Create</button>
+        <button type="submit" v-show="editmode" class="btn btn-primary blue">update</button>
+        <button type="submit" v-show="!editmode" class="btn btn-primary blue">Create</button>
+
       </div>
       </form>
     </div>
@@ -103,10 +111,14 @@
 <script>
     export default {
         data(){
+          
             return {
+            editmode:true,
             users: {},
             form: new Form({
+            id: '',
             name : '',
+            gender: '',
             email : '',
             password : '',
             remember_token : false
@@ -114,8 +126,27 @@
             }
         },
         methods: {
+           getResults(page = 1) {
+            axios.get('api/user?page=' + page)
+              .then(response => {
+                this.users = response.data;
+              });
+              },
+             editModel(user){
+              this.editmode = true;
+              this.form.clear();
+              this.form.reset();
+              $('#addUser').modal('show');
+              this.form.fill(user);
+            },
+            newModel(){
+              this.editmode = false;
+              this.form.clear();
+              this.form.reset();
+              $('#addUser').modal('show');
+            },
             loadUsers(){
-          axios.get('api/user').then(({data})=>(this.users = data.data));
+          axios.get('api/user').then(({data})=>(this.users = data));
             },
             deleteUser(id){
                   Swal.fire({
@@ -143,6 +174,7 @@
                         }
                     })
             },
+            //creating User
             createUser(){
                 this.$Progress.start();
                 this.form.post('api/user')
@@ -156,11 +188,32 @@
                  this.$Progress.finish();
                 })
                 .catch(()=>{
-
+                  this.$Progress.fail();
                 });
               
                 
+            },
+            //editing User
+            updateUser(){
+              this.$Progress.start();
+              this.form.put('api/user/'+this.form.id)
+              .then(()=>{
+              $('#addUser').modal('hide');
+              Swal.fire(
+                        'Updated!',
+                        'User has been Updated.',
+                        'success'
+                        );
+              this.$Progress.finish();
+              })
+              .catch(()=>{
+                Swal('Failed!',
+                     'Something went Wrong',
+                     'warning');
+              });
+    
             }
+
         },
           created(){
                 this.loadUsers();
