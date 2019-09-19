@@ -11,7 +11,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <meta name="csrf-token" content="{{ csrf_token() }}">
 
   <title>{{ config('app.name', 'RMS') }}</title>
-
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
   <link rel="stylesheet" href="/css/app.css">
 </head>
 <body class="hold-transition sidebar-mini">
@@ -222,7 +222,7 @@ scratch. This page gets rid of all links and provides the needed markup only.
                                         <p>
                                        {{ __('Logout') }}
                                      </p>
-                    </a>
+                             </a>
                    
 
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

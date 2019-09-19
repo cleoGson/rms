@@ -21,9 +21,14 @@
         <datatable :columns="columns" :sortKey="sortKey" :sortOrders="sortOrders" @sort="sortBy">
             <tbody>
                 <tr v-for="project in projects" :key="project.id">
+                    <td>{{project.id}}</td>
                     <td>{{project.deadline}}</td>
                     <td>{{project.budget}}</td>
                     <td>{{project.status}}</td>
+                    <td>
+                       <a href="#" @click="editModel(user)"> <i class="fas fa-edit blue"></i> </a>/
+                    </td>
+                    <td>Delete</td>
                 </tr>
             </tbody>
         </datatable>
@@ -51,8 +56,11 @@ export default {
   data() {
     let sortOrders = {};
     let columns = [
+      { width: "33%", label: "ID", name: "id" },
       { width: "33%", label: "Deadline", name: "deadline" },
       { width: "33%", label: "Budget", name: "budget" },
+      { width: "33%", label: "Status", name: "status" },
+      { width: "33%", label: "Status", name: "status" },
       { width: "33%", label: "Status", name: "status" }
     ];
     columns.forEach(column => {
@@ -63,7 +71,7 @@ export default {
       columns: columns,
       sortKey: "deadline",
       sortOrders: sortOrders,
-      perPage: ["10", "20", "30"],
+      perPage: ["10", "20", "30","100","1000","5000"],
       tableData: {
         draw: 0,
         length: 10,

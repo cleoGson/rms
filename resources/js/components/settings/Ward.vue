@@ -3,10 +3,10 @@
     <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Dashboard Component</div>
+                    <div class="card-header">List of Wards</div>
+
                     <div class="card-body">
-                     <coin-add-component></coin-add-component>
-                     <chart-component></chart-component>
+                       
                     </div>
                 </div>
             </div>
@@ -16,7 +16,8 @@
 
 <script>
     export default {
-      
-     
-     }
+        mounted() {
+            console.log('Component mounted.')
+        }
+    }
 </script>

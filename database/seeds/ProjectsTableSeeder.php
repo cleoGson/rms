@@ -12,7 +12,7 @@ class ProjectsTableSeeder extends Seeder
     {
         $faker = Faker::create();
         $statuses = ['Waiting for approval', 'Approved', 'In progress'];
-        foreach (range(1, 100) as $index) {
+        foreach (range(1, 10000) as $index) {
             DB::table('projects')->insert([
                 'status' => $statuses[shuffle($statuses)],
                 'deadline' => $faker->dateTimeBetween('+1 month', '+2 month'),

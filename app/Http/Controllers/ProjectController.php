@@ -17,7 +17,7 @@ class ProjectController extends Controller
         if ( $request->input('client') ) {
     	    return Project::select('id', 'deadline', 'budget', 'status')->get();
     	}
-        $columns = ['deadline', 'budget', 'status'];
+        $columns = ['deadline', 'budget', 'status','id'];
         $length = $request->input('length');
         $column = $request->input('column'); //Index
         $dir = $request->input('dir');
@@ -26,7 +26,8 @@ class ProjectController extends Controller
         if ($searchValue) {
             $query->where(function($query) use ($searchValue) {
                 $query->where('budget', 'like', '%' . $searchValue . '%')
-                ->orWhere('status', 'like', '%' . $searchValue . '%');
+                ->orWhere('status', 'like', '%' . $searchValue . '%')
+                ->orWhere('id', 'like', '%' . $searchValue . '%');
             });
         }
         $projects = $query->paginate($length);

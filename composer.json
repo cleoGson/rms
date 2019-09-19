@@ -16,6 +16,7 @@
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.0",
         "predis/predis": "^1.1",
+        "reinink/advanced-eloquent": "^0.2.0",
         "yajra/laravel-datatables": "^1.5"
     },
     "require-dev": {

@@ -10,21 +10,27 @@ window.Vue = require('vue');
 import VueRouter from 'vue-router';
 import { Form, HasError, AlertError } from 'vform';
 import VueProgressBar from 'vue-progressbar';
-//import DatatableFactory from 'vuejs-datatable';
+import Highcharts from 'highcharts'
+import { mapState } from 'vuex'
 import Swal from 'sweetalert2';
 window.Swal =Swal;
 
 window.Form =Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
+Vue.use(Highcharts)
+Vue.component('mapState',mapState)
 
-Vue.use(VueRouter);
+Vue.component()
+Vue.use(VueRouter)
+Vue.use({mapState})
 const routes = [
     { path: '/dashboard', component: require('./components/Dashboard.vue').default },
     { path: '/users', component: require('./components/Users.vue').default },
     { path: '/profile', component: require('./components/Profile.vue').default },
     { path: '/projects', component: require('./components/Project.vue').default },
-    { path: '/developer', component: require('./components/Developer.vue').default }
+    { path: '/developer', component: require('./components/Developer.vue').default },
+    { path: '*', component: require('./components/Profile.vue').default },
   ];
   
 
@@ -93,6 +99,8 @@ Vue.component(
   require('./components/passport/PersonalAccessTokens.vue').default
 );
 Vue.component('pagination', require('laravel-vue-pagination'));
+Vue.component('coin-add-component', require('./components/charts/AddComponent.vue').default);
+Vue.component('chart-component', require('./components/charts/ChartComponent.vue').default);
 
 const app = new Vue({
     el: '#app',

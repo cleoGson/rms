@@ -19,5 +19,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('projects', 'ProjectController');
+Route::resource('highchart','HighchartController');
+Route::resource('coins', 'CoinController');
 
 //Route::get('{path}','HomeController@index')->where( 'path', '([A-z\d-/_.]+)?' );
