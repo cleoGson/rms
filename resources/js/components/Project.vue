@@ -56,12 +56,12 @@ export default {
   data() {
     let sortOrders = {};
     let columns = [
-      { width: "33%", label: "ID", name: "id" },
-      { width: "33%", label: "Deadline", name: "deadline" },
-      { width: "33%", label: "Budget", name: "budget" },
-      { width: "33%", label: "Status", name: "status" },
-      { width: "33%", label: "Status", name: "status" },
-      { width: "33%", label: "Status", name: "status" }
+      { width: "", label: "ID", name: "id" },
+      { width: "", label: "Deadline", name: "deadline" },
+      { width: "", label: "Budget", name: "budget" },
+      { width: "", label: "Status", name: "status" },
+      { width: "", label: "Edit", name: "" },
+      { width: "", label: "Update", name: "" }
     ];
     columns.forEach(column => {
       sortOrders[column.name] = -1;

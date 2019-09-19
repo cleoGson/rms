@@ -1,5 +1,5 @@
 <template>
-    <table class="table table-bordered table-striped">
+ <table class="table table-bordered table-striped dataTable">
         <thead>
             <tr>
                 <th v-for="column in columns" :key="column.name" @click="$emit('sort', column.name)"
