@@ -206,6 +206,8 @@ scratch. This page gets rid of all links and provides the needed markup only.
               </li>
             </ul>
           </li>
+    
+
           <li class="nav-item">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-th indigo"></i>
@@ -229,6 +231,46 @@ scratch. This page gets rid of all links and provides the needed markup only.
                         @csrf
                     </form>
           </li>
+          <li class="nav-item has-treeview menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-cog green"></i>
+              <p>
+               Settings
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <router-link to="/country" class="nav-link active">
+                <vue-progress-bar></vue-progress-bar>
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Country</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/region" class="nav-link active">
+                <vue-progress-bar></vue-progress-bar>
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Region</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/district" class="nav-link active">
+                <vue-progress-bar></vue-progress-bar>
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>District</p>
+                </router-link>
+              </li>
+              <li class="nav-item">
+                <router-link to="/ward" class="nav-link active">
+                <vue-progress-bar></vue-progress-bar>
+                  <i class="fas fa-users nav-icon"></i>
+                  <p>Ward</p>
+                </router-link>
+              </li>
+            </ul>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

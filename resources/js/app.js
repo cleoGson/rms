@@ -13,6 +13,8 @@ import VueProgressBar from 'vue-progressbar';
 import Highcharts from 'highcharts'
 import { mapState } from 'vuex'
 import Swal from 'sweetalert2';
+import VueCtkDateTimePicker from 'vue-ctk-date-time-picker';
+import 'vue-ctk-date-time-picker/dist/vue-ctk-date-time-picker.css';
 window.Swal =Swal;
 
 window.Form =Form;
@@ -30,6 +32,10 @@ const routes = [
     { path: '/profile', component: require('./components/Profile.vue').default },
     { path: '/projects', component: require('./components/Project.vue').default },
     { path: '/developer', component: require('./components/Developer.vue').default },
+    { path: '/country', component: require('./components/settings/Country.vue').default },
+    { path: '/region', component: require('./components/settings/Region.vue').default },
+    { path: '/district', component: require('./components/settings/District.vue').default },
+    { path: '/ward', component: require('./components/settings/Ward.vue').default },
     { path: '*', component: require('./components/Profile.vue').default },
   ];
   
@@ -101,6 +107,7 @@ Vue.component(
 Vue.component('pagination', require('laravel-vue-pagination'));
 Vue.component('coin-add-component', require('./components/charts/AddComponent.vue').default);
 Vue.component('chart-component', require('./components/charts/ChartComponent.vue').default);
+Vue.component('VueCtkDateTimePicker', VueCtkDateTimePicker);
 
 const app = new Vue({
     el: '#app',

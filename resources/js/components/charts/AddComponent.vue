@@ -27,6 +27,14 @@
                                 <input type="text" class="form-control" v-model="coin.price"  required>
                             </div>
                         </div>
+                          <div class="form-group row">
+                    <label for="year" class="col-md-4 col-form-label text-md-right">Date</label>
+                         <div class="col-md-6">  
+                        <VueCtkDateTimePicker v-model="start_date">
+                        <input type="text"  class="form-control"  format='YYYY-MM-DD hh:mm'/>
+                        </VueCtkDateTimePicker>
+                          </div>
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-8 offset-md-4">
@@ -45,7 +53,8 @@
 export default {
       data() {
          return {
-            coin: {}
+            coin: {},
+            start_date:""
          }
       },
       methods: {

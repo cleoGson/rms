@@ -34,10 +34,12 @@ export default {
          }
     },
    mounted() {
-   Highcharts.chart('container-gant', {
+    Highcharts.chart('container-gant', {
     chart: {
         type: 'column'
     },
+    color:['#2b908f', '#90ee7e', '#f45b5b', '#7798BF', '#aaeeee', '#ff0066',
+        '#eeaaee', '#55BF3B', '#DF5353', '#7798BF', '#aaeeee'],
     title: {
         text: 'Monthly Average Rainfall'
     },
@@ -45,20 +47,20 @@ export default {
         text: 'Source: WorldClimate.com'
     },
     xAxis: {
-        categories:[
-                                 'Jan',
-                                 'Feb',
-                                 'Mar',
-                                 'Apr',
-                                 'May',
-                                 'Jun',
-                                 'Jul',
-                                 'Aug',
-                                 'Sep',
-                                 'Oct',
-                                 'Nov',
-                                 'Dec'
-                           ],
+        categories: [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec'
+        ],
         crosshair: true
     },
     yAxis: {
@@ -98,7 +100,7 @@ export default {
         data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
 
     }]
-});        
+});       
    }
 }
 </script>
