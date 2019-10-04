@@ -74343,6 +74343,7 @@ var render = function() {
                   _c(
                     "VueCtkDateTimePicker",
                     {
+                      attrs: { format: "YYYY-MM-DD hh:mm" },
                       model: {
                         value: _vm.start_date,
                         callback: function($$v) {
@@ -74354,7 +74355,7 @@ var render = function() {
                     [
                       _c("input", {
                         staticClass: "form-control",
-                        attrs: { type: "text", format: "YYYY-MM-DD hh:mm" }
+                        attrs: { type: "text", format: "YYYY-MM-DD" }
                       })
                     ]
                   )

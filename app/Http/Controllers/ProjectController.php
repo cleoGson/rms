@@ -64,7 +64,7 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        //
+        return view('datatables.datatable');
     }
 
     /**
@@ -99,5 +99,16 @@ class ProjectController extends Controller
     public function destroy(Project $project)
     {
         //
+    }
+    public function getRowDetails()
+    {
+        return view('datatables.datatable');
+    }
+
+    public function getRowDetailsData()
+    {
+        $users = User::select(['id', 'name', 'email', 'created_at', 'updated_at']);
+
+        return Datatables::of($users)->make(true);
     }
 }

@@ -30,8 +30,8 @@
                           <div class="form-group row">
                     <label for="year" class="col-md-4 col-form-label text-md-right">Date</label>
                          <div class="col-md-6">  
-                        <VueCtkDateTimePicker v-model="start_date">
-                        <input type="text"  class="form-control"  format='YYYY-MM-DD hh:mm'/>
+                        <VueCtkDateTimePicker v-model="start_date" format='YYYY-MM-DD hh:mm' >
+                        <input type="text"  class="form-control" format='YYYY-MM-DD'/>
                         </VueCtkDateTimePicker>
                           </div>
                         </div>
